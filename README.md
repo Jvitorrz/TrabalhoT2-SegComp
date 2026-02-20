@@ -6,16 +6,16 @@
 
 ---
 
-## 1. Instruções de Instalação e Configuração do Ambiente [cite: 28]
+## 1. Instruções de Instalação e Configuração do Ambiente 
 
-[cite_start]O ambiente escolhido para os testes de penetração foi o **OWASP Juice Shop**[cite: 14], uma aplicação web deliberadamente vulnerável.
+O ambiente escolhido para os testes de penetração foi o **OWASP Juice Shop**, uma aplicação web deliberadamente vulnerável.
 
-### [cite_start]Requisitos de Software e Sistema Operacional [cite: 31]
+### Requisitos de Software e Sistema Operacional 
 * **Sistema Operacional Hospedeiro:** Windows 11 com WSL2 habilitado (Subsistema Windows para Linux).
 * **Software de Containerização:** Docker Desktop.
 * **Imagem Vulnerável:** `bkimminich/juice-shop:latest`
 
-### [cite_start]Passo a Passo de Instalação e Execução [cite: 29]
+### Passo a Passo de Instalação e Execução 
 
 1. **Baixar a imagem da aplicação:**
    ```bash
