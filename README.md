@@ -22,24 +22,24 @@ O ambiente escolhido para os testes de penetração foi o **OWASP Juice Shop**, 
    docker pull bkimminich/juice-shop
 
 Iniciar o ambiente vulnerável: 
-Foi definida a porta 3001 no hospedeiro para evitar conflitos de rede.
+Foi definida a porta 3000 no hospedeiro.
 
 Bash
-docker run --rm -d --name juiceshop_t2 -p 3001:3000 bkimminich/juice-shop
+docker run --rm -d --name juiceshop_t2 -p 3000:3000 bkimminich/juice-shop
 
 Acesso à Aplicação: 
 
-URL: http://localhost:3001
+URL: http://localhost:3000
 
-Porta: 3001
+Porta: 3000
 
 Credenciais: A aplicação não possui credenciais padrão expostas intencionalmente.
-
 
 Como parar o ambiente vulnerável: 
 
 Bash
 docker stop juiceshop_t2
+
 2. Descrição Completa dos Experimentos Realizados 
 
 Ferramentas de Pentesting Utilizadas 
