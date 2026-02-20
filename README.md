@@ -97,8 +97,7 @@ O navegador embutido do Burp Suite foi utilizado para rotear o tráfego automati
 
 * Evidência Visual: 
 
-[COLE SEU PRINT AQUI - TELA DO BURP COM O PAYLOAD OU TELA LOGADA COMO ADMIN]
-
+<img width="1209" height="638" alt="image" src="https://github.com/user-attachments/assets/8c2efb7d-cff4-499b-afff-170633a3a947" />
 
 * Interpretação do Resultado: 
 O banco de dados recebeu a string diretamente na query. O caractere ' fechou a instrução esperada, o or 1=1 forçou uma condição verdadeira que retorna o primeiro usuário do banco (o admin), e o -- comentou o restante da query que validaria a senha.
