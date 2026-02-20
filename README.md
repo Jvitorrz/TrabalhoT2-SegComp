@@ -1,6 +1,7 @@
 # Trabalho T2.2 - Instalação de Servidor Web Vulnerável e Testes de Penetração
 
 **Disciplina:** Segurança em Computação (2025/2)
+
 **Alunos:** José Vitor Zorzal e Gustavo Breda Sarti
 
 ---
