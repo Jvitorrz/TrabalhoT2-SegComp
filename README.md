@@ -147,7 +147,7 @@ A vulnerabilidade pode ser evitada utilizando Prepared Statements (Consultas Par
 
 1. Na interface principal, clicar no ícone de lupa (Search).
 
-2. Inserir o payload de iframe no campo de busca: <iframe src="javascript:alert('XSS_T2.2')">
+2. Inserir o payload de iframe no campo de busca: <iframe src="javascript:alert('XSS kkkk')">
 
 3. Pressionar Enter.
 
