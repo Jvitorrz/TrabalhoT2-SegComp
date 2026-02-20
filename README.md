@@ -1,13 +1,11 @@
-Markdown
-#Trabalho T2.2 - Instalação de Servidor Web Vulnerável + Testes de Penetração [cite: 5]
+#Trabalho T2.2 - Instalação de Servidor Web Vulnerável e Testes de Penetração
 
-[cite_start]**Disciplina:** Segurança em Computação (2025/2) [cite: 4]
-[cite_start]**Instituição:** Universidade Federal do Espírito Santo (UFES) - CT / DI [cite: 1, 3]
-**Aluno:** José Vitor Zorzal
+**Disciplina:** Segurança em Computação (2025/2) 
+**Alunos:** José Vitor Zorzal e Gustavo Breda Sarti
 
 ---
 
-## [cite_start]1. Instruções de Instalação e Configuração do Ambiente [cite: 28]
+## 1. Instruções de Instalação e Configuração do Ambiente [cite: 28]
 
 [cite_start]O ambiente escolhido para os testes de penetração foi o **OWASP Juice Shop**[cite: 14], uma aplicação web deliberadamente vulnerável.
 
