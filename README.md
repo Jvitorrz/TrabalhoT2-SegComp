@@ -167,7 +167,7 @@ A vulnerabilidade pode ser evitada utilizando Prepared Statements (Consultas Par
 
 * Evidência Visual: 
 
-<img width="1893" height="744" alt="image" src="https://github.com/user-attachments/assets/1cfa4c4a-7462-4196-91ba-544fc8456b04" />
+<img width="1889" height="850" alt="image" src="https://github.com/user-attachments/assets/ab21987a-a2fb-47cb-818a-deb2146f2847" />
 
 * Interpretação do Resultado:
 O frontend da aplicação recebe o parâmetro de busca e o renderiza dinamicamente na página HTML sem realizar a devida codificação de saída. Isso faz com que o navegador interprete a tag <iframe> como um elemento HTML legítimo e execute o JavaScript.
