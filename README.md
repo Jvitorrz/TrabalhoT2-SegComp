@@ -82,7 +82,7 @@ O navegador embutido do Burp Suite foi utilizado para rotear o tráfego automati
 
    ```http
    POST /rest/user/login HTTP/1.1
-   Host: localhost:3001
+   Host: localhost:3000
    Content-Type: application/json
 
    {"email":"' or 1=1--","password":"123"}
@@ -122,7 +122,7 @@ A vulnerabilidade pode ser evitada utilizando Prepared Statements (Consultas Par
 
    ```http
    GET /rest/products/search?q=%3Ciframe%20src%3D%22javascript%3Aalert%BN%27XSS_T2.2%27%29%22%3E HTTP/1.1
-   Host: localhost:3001
+   Host: localhost:3000
 
 * Resposta Obtida: 
 
