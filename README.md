@@ -21,137 +21,126 @@ O ambiente escolhido para os testes de penetração foi o **OWASP Juice Shop**, 
    ```bash
    docker pull bkimminich/juice-shop
 
-Iniciar o ambiente vulnerável: 
+2. **Iniciar o ambiente vulnerável:**
 Foi definida a porta 3000 no hospedeiro.
 
-Bash
-docker run --rm -d --name juiceshop_t2 -p 3000:3000 bkimminich/juice-shop
+   ```bash
+   docker run --rm -d --name juiceshop_t2 -p 3000:3000 bkimminich/juice-shop
 
-Acesso à Aplicação: 
+3. **Acesso à Aplicação:**
+   
+* URL: http://localhost:3000
+* Porta: 3000
+* Credenciais: A aplicação não possui credenciais padrão expostas intencionalmente.
 
-URL: http://localhost:3000
+4. **Como parar o ambiente vulnerável:**
 
-Porta: 3000
+   ```bash
+   docker stop juiceshop_t2
 
-Credenciais: A aplicação não possui credenciais padrão expostas intencionalmente.
+## 2. Descrição Completa dos Experimentos Realizados 
 
-Como parar o ambiente vulnerável: 
+### Ferramentas de Pentesting Utilizadas 
 
-Bash
-docker stop juiceshop_t2
+* Proxy de Interceptação: Burp Suite Community Edition 2026.1.4.0.
 
-2. Descrição Completa dos Experimentos Realizados 
+* Navegador: Chromium (Embutido nativamente no Burp Suite).
 
-Ferramentas de Pentesting Utilizadas 
-
-
-Proxy de Interceptação: Burp Suite Community Edition.
-
-Navegador: Chromium (Embutido nativamente no Burp Suite).
-
-Configurações Específicas 
+### Configurações Específicas 
 
 O navegador embutido do Burp Suite foi utilizado para rotear o tráfego automaticamente através do proxy local 127.0.0.1:8080 , permitindo a interceptação, análise e modificação das requisições HTTP antes de serem enviadas ao servidor.
-+1
 
-Procedimento Experimental Geral 
+### Procedimento Experimental Geral 
 
-Iniciar o Docker Desktop e o contêiner do Juice Shop.
+1. Iniciar o Docker Desktop e o contêiner do Juice Shop.
 
-Iniciar o Burp Suite Community e abrir a aba "Proxy" -> "Intercept".
+2. Iniciar o Burp Suite Community e abrir a aba "Proxy" -> "Intercept".
 
-Clicar em "Open Browser" dentro do Burp para abrir o navegador com o proxy já configurado.
+3. Clicar em "Open Browser" dentro do Burp para abrir o navegador com o proxy já configurado.
 
-Navegar até a URL da aplicação local.
+4. Navegar até a URL da aplicação local.
 
-3. Exploração de Vulnerabilidades 
+## 3. Exploração de Vulnerabilidades 
 
-3.1. 
-Vulnerabilidade 1: SQL Injection (Authentication Bypass) 
+### 3.1. Vulnerabilidade 1: SQL Injection (Authentication Bypass) 
 
-Objetivo do ataque: Burlar o mecanismo de autenticação para acessar a conta do usuário administrador sem possuir a senha.
+* Objetivo do ataque: Burlar o mecanismo de autenticação para acessar a conta do usuário administrador sem possuir a senha.
 
+* Passos realizados: 
 
-Passos realizados: 
+1. No navegador do Burp, acessar a rota de login (/#/login).
 
-No navegador do Burp, acessar a rota de login (/#/login).
+2. Ativar a interceptação no Burp Suite (Intercept is on).
 
-Ativar a interceptação no Burp Suite (Intercept is on).
+3. Preencher o campo de e-mail com o payload: ' or 1=1-- e qualquer caractere na senha.
 
-Preencher o campo de e-mail com o payload: ' or 1=1-- e qualquer caractere na senha.
+4. Clicar em "Log in" e analisar a requisição retida no Burp.
 
-Clicar em "Log in" e analisar a requisição retida no Burp.
+5. Liberar a requisição (Forward) e observar o login bem-sucedido na interface.
 
-Liberar a requisição (Forward) e observar o login bem-sucedido na interface.
+* Requisição Enviada (Interceptada): 
 
+   ```http
+   POST /rest/user/login HTTP/1.1
+   Host: localhost:3001
+   Content-Type: application/json
 
-Requisição Enviada (Interceptada): 
+   {"email":"' or 1=1--","password":"123"}
 
-HTTP
-POST /rest/user/login HTTP/1.1
-Host: localhost:3001
-Content-Type: application/json
+* Resposta Obtida: 
 
-{"email":"' or 1=1--","password":"123"}
+   ```http
+   HTTP/1.1 200 OK
+   Content-Type: application/json; charset=utf-8
 
-Resposta Obtida: 
+   {"authentication":{"umail":"admin@juice-sh.op","id":1,"token":"eyJhbGciOiJIUzI1..."}}
 
-HTTP
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{"authentication":{"umail":"admin@juice-sh.op","id":1,"token":"eyJhbGciOiJIUzI1..."}}
-
-Evidência Visual: 
+* Evidência Visual: 
 
 [COLE SEU PRINT AQUI - TELA DO BURP COM O PAYLOAD OU TELA LOGADA COMO ADMIN]
 
 
-Interpretação do Resultado: 
+* Interpretação do Resultado: 
 O banco de dados recebeu a string diretamente na query. O caractere ' fechou a instrução esperada, o or 1=1 forçou uma condição verdadeira que retorna o primeiro usuário do banco (o admin), e o -- comentou o restante da query que validaria a senha.
 
-
-Discussão sobre Mitigação: 
+* Discussão sobre Mitigação:
 A vulnerabilidade pode ser evitada utilizando Prepared Statements (Consultas Parametrizadas) ou frameworks ORM modernos. Isso garante que o banco de dados trate a entrada do usuário estritamente como um dado, e não como código executável.
-+1
 
-3.2. 
-Vulnerabilidade 2: DOM Cross-Site Scripting (XSS) 
+### 3.2. Vulnerabilidade 2: DOM Cross-Site Scripting (XSS) 
 
-Objetivo do ataque: Injetar e executar um script malicioso no navegador da vítima através da barra de pesquisa.
+* Objetivo do ataque: Injetar e executar um script malicioso no navegador da vítima através da barra de pesquisa.
 
+* Passos realizados: 
 
-Passos realizados: 
+1. Na interface principal, clicar no ícone de lupa (Search).
 
-Na interface principal, clicar no ícone de lupa (Search).
+2. Inserir o payload de iframe no campo de busca: <iframe src="javascript:alert('XSS_T2.2')">
 
-Inserir o payload de iframe no campo de busca: <iframe src="javascript:alert('XSS_T2.2')">
+3. Pressionar Enter.
 
-Pressionar Enter.
+* Requisição Enviada: 
 
+   ```http
+   GET /rest/products/search?q=%3Ciframe%20src%3D%22javascript%3Aalert%BN%27XSS_T2.2%27%29%22%3E HTTP/1.1
+   Host: localhost:3001
 
-Requisição Enviada: 
+* Resposta Obtida: 
 
-HTTP
-GET /rest/products/search?q=%3Ciframe%20src%3D%22javascript%3Aalert%BN%27XSS_T2.2%27%29%22%3E HTTP/1.1
-Host: localhost:3001
+   ```http
+   HTTP/1.1 200 OK
+   Content-Type: application/json; charset=utf-8
 
-Resposta Obtida: 
+   {"status":"success","data":[]}
 
-HTTP
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{"status":"success","data":[]}
-
-Evidência Visual: 
+* Evidência Visual: 
 
 [COLE SEU PRINT AQUI - TELA DO NAVEGADOR MOSTRANDO A CAIXA DE ALERTA COM O SCRIPT EXECUTADO]
 
 
-Interpretação do Resultado: 
+* Interpretação do Resultado:
 O frontend da aplicação recebe o parâmetro de busca e o renderiza dinamicamente na página HTML sem realizar a devida codificação de saída. Isso faz com que o navegador interprete a tag <iframe> como um elemento HTML legítimo e execute o JavaScript.
 
 
-Discussão sobre Mitigação: Deve-se implementar Output Encoding transformando caracteres especiais em entidades HTML seguras antes de renderizar dados fornecidos pelo usuário no navegador. Adicionalmente, implementar uma rigorosa Content Security Policy (CSP) mitigaria a execução de scripts não autorizados.
+* Discussão sobre Mitigação:
+Deve-se implementar Output Encoding transformando caracteres especiais em entidades HTML seguras antes de renderizar dados fornecidos pelo usuário no navegador. Adicionalmente, implementar uma rigorosa Content Security Policy (CSP) mitigaria a execução de scripts não autorizados.
 +1
